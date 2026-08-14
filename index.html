@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      WalletFlow — Every rupee, accounted for. Offline-first finance for
+      Android.
+    </title>
+    <meta
+      name="description"
+      content="WalletFlow is an offline-first personal finance manager for Android. No account, no login, no network. Every transaction lives in a real account, so your balance is always exact — down to the paise."
+    />
+    <meta name="theme-color" content="#06140f" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource-variable/manrope/index.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono/index.css"
+    />
+    <link rel="stylesheet" href="./src/css/style.css" />
+
+    <!-- Privacy-friendly analytics by Plausible -->
+    <script
+      async
+      src="https://plausible.io/js/pa-9y1h_L-qaOPMuE0JQBdSr.js"
+    ></script>
+    <script>
+      ((window.plausible =
+        window.plausible ||
+        function () {
+          (plausible.q = plausible.q || []).push(arguments);
+        }),
+        (plausible.init =
+          plausible.init ||
+          function (i) {
+            plausible.o = i || {};
+          }));
+      plausible.init();
+    </script>
+  </head>
+  <body>
+    <div class="ambient">
+      <div class="glow g1"></div>
+      <div class="glow g2"></div>
+      <div class="glow g3"></div>
+    </div>
+    <div class="grid-layer"></div>
+    <div class="coin c1">₹</div>
+    <div class="coin c2">₹</div>
+    <div class="coin c3">₹</div>
+    <div class="coin c4">₹</div>
+
+    <div class="ribbon">
+      <div class="wrap">
+        <span class="live-dot"></span> Now live on Google Play · WalletFlow v1.0
+        — free, no account required
+      </div>
+    </div>
+
+    <header class="nav" id="nav">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top"> Wallet<b>Flow</b> </a>
+        <nav class="nav-links" id="navLinks">
+          <a href="#flaw">The idea</a>
+          <a href="#features">Features</a>
+          <a href="#screens">Screens</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#faq">FAQ</a>
+          <a
+            class="play-badge"
+            href="https://play.google.com/apps/test/com.walletflow.in/"
+            data-play-badge
+            aria-label="Get it on Google Play"
+          ></a>
+        </nav>
+        <div class="nav-cta">
+          <a
+            class="play-badge"
+            href="https://play.google.com/apps/test/com.walletflow.in/"
+            data-play-badge
+            aria-label="Get it on Google Play"
+          ></a>
+          <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+
+    <main id="top">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow reveal"
+              >Offline-first · Android · Material 3</span
+            >
+            <h1 class="reveal" data-d="1">
+              Every rupee,<br /><span class="ink">accounted for.</span><br />Not
+              just <span class="strike">tracked</span>.
+            </h1>
+            <p class="sub reveal" data-d="2">
+              Most expense apps log what you spent and quietly forget where it
+              came from. WalletFlow ties every transaction to a real account —
+              type it, share a bank SMS, or let a recurring bill post itself —
+              so the balance you see is exact. Down to the paise.
+            </p>
+            <div class="hero-actions reveal" data-d="3">
+              <a
+                class="play-badge"
+                href="https://play.google.com/apps/test/com.walletflow.in/"
+                data-play-badge
+                aria-label="Get it on Google Play"
+              ></a>
+              <a class="btn-ghost" href="#screens">See the real screens →</a>
+            </div>
+            <div class="hero-meta reveal" data-d="3">
+              <span class="chip"><span class="d"></span> No login</span>
+              <span class="chip"><span class="d"></span> No cloud</span>
+              <span class="chip"><span class="d"></span> SMS quick-add</span>
+            </div>
+            <div class="hero-rating reveal" data-d="4">
+              <span class="stars">★★★★★</span>
+              <span>Integer minor-unit math · balances that never drift</span>
+            </div>
+          </div>
+
+          <div class="phone-stage reveal" data-d="2">
+            <div class="float-tag t1">
+              <span class="d"></span> balance derived · live
+            </div>
+            <div class="float-tag t2">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="5" y="10" width="14" height="10" rx="2.5" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+              </svg>
+              on-device only
+            </div>
+            <div
+              class="device"
+              id="heroDevice"
+              aria-label="WalletFlow home screen preview"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARQUEE -->
+      <div class="marquee" aria-hidden="true">
+        <div class="track" id="marquee"></div>
+      </div>
+
+      <!-- FLAW -->
+      <section id="flaw">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">The flaw we fix</span>
+            <h2>
+              A tracker that can't tell you <em>what you have</em> isn't a
+              ledger — it's a diary.
+            </h2>
+          </div>
+          <div class="flaw-grid">
+            <div class="flaw-card flaw-bad reveal">
+              <span class="tag">✕ Typical expense app</span>
+              <h3>Records the spend. Forgets the source.</h3>
+              <p>
+                You log ₹412 on dinner and ₹1,200 on groceries. The app tallies
+                "you spent ₹1,612" — but it never subtracted that from your
+                bank, your cash, or anywhere. Ask "how much do I have left?" and
+                it has no honest answer.
+              </p>
+              <div class="unknown">
+                ₹ ?<small
+                  >balance unknown — money was never placed in an account</small
+                >
+              </div>
+            </div>
+            <div class="flaw-card flaw-good reveal" data-d="1">
+              <span class="tag">✓ WalletFlow ledger</span>
+              <h3>Every rupee lives in a real account.</h3>
+              <p>
+                An expense reduces its account; income increases it. A transfer
+                just moves money between two — and never pretends to be income.
+                Balances are derived from transactions in SQL, never edited by
+                hand.
+              </p>
+              <div class="ledger">
+                <div class="row">
+                  <span>Opening · ICICI Bank</span><span>₹20,000.00</span>
+                </div>
+                <div class="row">
+                  <span>− Groceries</span><span class="neg">₹1,200.00</span>
+                </div>
+                <div class="row">
+                  <span>− Dinner</span><span class="neg">₹412.00</span>
+                </div>
+                <div class="row">
+                  <span>− Auto-debit (rent share)</span
+                  ><span class="neg">₹237.00</span>
+                </div>
+                <div class="row total">
+                  <span>Closing balance</span
+                  ><span class="pos">₹18,151.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEMO -->
+      <section id="how">
+        <div class="wrap">
+          <div class="demo reveal">
+            <div>
+              <span class="eyebrow">Try it · the BalanceEngine</span>
+              <h2 style="margin-top: 16px">
+                Watch the rules
+                <em style="color: var(--gold); font-style: italic">actually</em>
+                hold.
+              </h2>
+              <p>
+                This is the same pure logic that ships in the app and passes its
+                test suite — Bank ₹20,000 dropping to ₹18,151 after three
+                expenses, transfers moving money without touching income or
+                expense totals.
+              </p>
+              <div class="rule">
+                <span style="color: var(--gold)">ⓘ</span
+                ><span id="ruleText"
+                  >Pick an amount, then apply a move. Balances update to the
+                  paise.</span
+                >
+              </div>
+            </div>
+            <div class="demo-panel">
+              <div class="demo-accts">
+                <div class="d-acct" id="acctBank">
+                  <div class="ic">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path
+                        d="M12 3 2 8.6h20L12 3zM4.5 10h2.6v7H4.5zM9.5 10h2.6v7H9.5zM14.4 10H17v7h-2.6zM19.4 10H22v7h-2.6zM2.5 19h19v2.4h-19z"
+                      />
+                    </svg>
+                  </div>
+                  <small>Bank</small>
+                  <div class="v" id="vBank">₹20,000.00</div>
+                </div>
+                <div class="d-acct" id="acctWallet">
+                  <div class="ic">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="3" y="6" width="18" height="13" rx="3" />
+                      <circle
+                        cx="16.5"
+                        cy="12.5"
+                        r="1.5"
+                        fill="currentColor"
+                        stroke="none"
+                      />
+                    </svg>
+                  </div>
+                  <small>Wallet</small>
+                  <div class="v" id="vWallet">₹2,000.00</div>
+                </div>
+              </div>
+              <div class="demo-totals">
+                <div class="d-tot in">
+                  <small>Month income</small><b id="vIn">₹0.00</b>
+                </div>
+                <div class="d-tot out">
+                  <small>Month expense</small><b id="vOut">₹0.00</b>
+                </div>
+              </div>
+              <div class="demo-controls">
+                <div class="amt-row">
+                  <label>Amount</label>
+                  <div class="stepper">
+                    <button type="button" id="amtMinus" aria-label="decrease">
+                      −
+                    </button>
+                    <input
+                      id="amtInput"
+                      type="text"
+                      inputmode="numeric"
+                      value="849"
+                      aria-label="amount in rupees"
+                    />
+                    <button type="button" id="amtPlus" aria-label="increase">
+                      +
+                    </button>
+                  </div>
+                </div>
+                <div class="demo-btns">
+                  <button class="b-in" data-act="in">
+                    <span class="em">＋</span>Income → Bank
+                  </button>
+                  <button class="b-out" data-act="out">
+                    <span class="em">－</span>Expense ← Bank
+                  </button>
+                  <button class="b-tr" data-act="tr">
+                    <span class="em">⇄</span>Bank → Wallet
+                  </button>
+                </div>
+                <button class="demo-reset" id="demoReset" type="button">
+                  ↺ reset ledger
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BENTO -->
+      <section id="features">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">Everything in the wallet</span>
+            <h2>
+              A complete ledger, <em>not</em> a notepad with a calculator.
+            </h2>
+          </div>
+          <div class="bento">
+            <div class="tile span2 row2 reveal" id="tileReports">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3.5 19.5h17" />
+                  <path d="M6.5 15l3.5-5 3 3 4.5-6" />
+                  <circle cx="17.5" cy="7" r="1.4" />
+                </svg>
+              </div>
+              <h3>Reports that answer back</h3>
+              <p>
+                Period presets or a custom range. A spending trend switchable
+                between line, bar and calendar heatmap — axis labels on both
+                sides, tap any point for the exact date and amount, with a Total
+                / Daily-average / Highest-day strip below.
+              </p>
+              <div class="segdemo" id="bentoSeg">
+                <span class="on" data-type="line" role="button">〜 Line</span
+                ><span data-type="bar" role="button">▥ Bar</span
+                ><span data-type="heat" role="button">▦ Heatmap</span>
+              </div>
+              <div
+                class="minichart"
+                id="bentoChart"
+                role="img"
+                aria-label="Spending trend preview"
+              ></div>
+              <div class="ministrip">
+                <div><b>₹12,010.00</b><span>Total</span></div>
+                <div><b>₹857.85</b><span>Daily avg</span></div>
+                <div><b>₹8,500.00</b><span>Highest day</span></div>
+              </div>
+            </div>
+
+            <div class="tile span2 reveal" data-d="1" id="tileSms">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3v11" />
+                  <path d="m8 7 4-4 4 4" />
+                  <path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6" />
+                </svg>
+              </div>
+              <h3>Add from a shared SMS</h3>
+              <p>
+                Long-press a bank or UPI message, share it to WalletFlow. The
+                parser prefills amount, direction, payee and date — the original
+                text lands in Notes. No SMS permission; you initiate every
+                share.
+              </p>
+              <div
+                class="smsvis"
+                id="smsvis"
+                role="button"
+                tabindex="0"
+                aria-label="Replay the SMS quick-add animation"
+              >
+                <div class="bubble">
+                  "₹650.00 debited from ICICI a/c ••4821 to UDEMY *MUM…"
+                </div>
+                <span class="arrow">➜</span>
+                <div class="prefill">
+                  <span>−₹650.00 · expense</span
+                  ><span>Udemy · ICICI ··4821</span
+                  ><span>today → editable</span>
+                </div>
+              </div>
+              <span class="smshint">↻ click to replay</span>
+            </div>
+
+            <div class="tile reveal" data-d="2">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="5.5" width="18" height="13" rx="2.5" />
+                  <path d="M3 10.5h18" />
+                  <path d="M7 15h4" />
+                </svg>
+              </div>
+              <h3>Accounts that look like cards</h3>
+              <p>
+                Gradient, embossed chip, masked digits, contactless mark for
+                banks — a UPI-style QR glyph for wallets & cash.
+              </p>
+              <div class="minicard">
+                <span class="chipr"></span
+                ><span class="cl"
+                  ><svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  >
+                    <path d="M7 9a8 8 0 0 1 0 6" />
+                    <path d="M11 7a11 11 0 0 1 0 10" />
+                    <path d="M15 5a14 14 0 0 1 0 14" /></svg></span
+                ><span class="dm">•••• •••• •••• 4821</span
+                ><span class="bt"
+                  ><span>ICICI</span><span>₹39,290.00</span></span
+                >
+              </div>
+            </div>
+
+            <div class="tile reveal" data-d="3" id="tileWidget">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="8" height="8" rx="1.8" />
+                  <rect x="13" y="3" width="8" height="5.5" rx="1.8" />
+                  <rect x="13" y="10.5" width="8" height="10.5" rx="1.8" />
+                  <rect x="3" y="13" width="8" height="8" rx="1.8" />
+                </svg>
+              </div>
+              <h3>A widget for every size</h3>
+              <p>
+                Resizable from a tiny corner tile to a large card — five
+                size-aware layouts, today's net in green/red, refresh +
+                quick-add.
+              </p>
+              <div
+                class="wvis"
+                id="wvis"
+                role="button"
+                tabindex="0"
+                aria-label="Cycle the widget sizes"
+              >
+                <div class="w w1 on">−₹650</div>
+                <div class="w w2">Today · −₹650.00<br />↻ &nbsp;＋</div>
+                <div class="w w3">
+                  <span class="wdonut"></span
+                  ><span>Food 38%<br />Rent 26%<br />Transit 18%</span>
+                </div>
+              </div>
+              <div class="wcap" id="wcap">1×1 · corner tile</div>
+            </div>
+
+            <div class="tile span2 reveal">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M3 6.5A2.5 2.5 0 0 1 5.5 4h4l2 2.5h7A2.5 2.5 0 0 1 21 9v8.5a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 17.5v-11z"
+                  />
+                  <path d="M8 14h8" />
+                </svg>
+              </div>
+              <h3>Categories, two levels deep</h3>
+              <p>
+                Groups with subcategories — Income → Salary / Bonus / Interest,
+                Subscription → Mobile / TV / Internet. Browse a curated catalog
+                of 30+ groups and ~190 presets; add a whole group in one tap, or
+                fully custom ones. Every category editable, deletable,
+                regroupable.
+              </p>
+              <div class="tagchips">
+                <span class="grp">Food ▾</span><span class="hot">Groceries</span
+                ><span>Dining out</span><span>Swiggy</span>
+                <span class="grp">Subscription ▾</span><span>Mobile</span
+                ><span>OTT</span> <span class="grp">Income ▾</span
+                ><span class="hot">Salary</span><span>SIP return</span>
+              </div>
+            </div>
+
+            <div class="tile reveal" data-d="1">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="8.5" />
+                  <path d="M12 3.5V12l5.5 4.5" />
+                </svg>
+              </div>
+              <h3>Budgets that roll up</h3>
+              <p>
+                Monthly + per-category. A group budget counts its subcategories'
+                spend too. 80 / 90 / 100% colors, a strong highlight when
+                reached, and an in-app alert the moment you cross.
+              </p>
+              <div class="budgetbar warn">
+                <div class="top">
+                  <span>Food (all subs)</span><span>₹3,180 / ₹3,500</span>
+                </div>
+                <div class="track"><div class="fill" data-fill="91"></div></div>
+              </div>
+            </div>
+
+            <div class="tile reveal" data-d="2" id="tileAppear">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 3a9 9 0 1 0 0 18c1.2 0 2-.9 2-2 0-.8-.4-1.2-.4-2 0-1.1.9-2 2-2h2.1A4.3 4.3 0 0 0 22 10.8 9.8 9.8 0 0 0 12 3z"
+                  />
+                  <circle
+                    cx="7.5"
+                    cy="10.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                  <circle
+                    cx="12"
+                    cy="7.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                  <circle
+                    cx="16.5"
+                    cy="10.5"
+                    r="1"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </div>
+              <h3>Your look, your rules</h3>
+              <p>
+                Light / dark / system, six accents, true-black AMOLED mode, and
+                a frosted-glass Total Assets card on the dashboard. Currency
+                picker shows real symbols.
+              </p>
+              <div class="accents">
+                <i
+                  class="on"
+                  data-color="#15564b"
+                  style="background: #15564b"
+                  role="button"
+                  aria-label="teal accent"
+                ></i
+                ><i
+                  data-color="#2e8b62"
+                  style="background: #2e8b62"
+                  role="button"
+                  aria-label="green accent"
+                ></i
+                ><i
+                  data-color="#4a7dbd"
+                  style="background: #4a7dbd"
+                  role="button"
+                  aria-label="blue accent"
+                ></i
+                ><i
+                  data-color="#a678e0"
+                  style="background: #a678e0"
+                  role="button"
+                  aria-label="violet accent"
+                ></i
+                ><i
+                  data-color="#d0863a"
+                  style="background: #d0863a"
+                  role="button"
+                  aria-label="amber accent"
+                ></i
+                ><i
+                  data-color="#d5587c"
+                  style="background: #d5587c"
+                  role="button"
+                  aria-label="rose accent"
+                ></i>
+                <span class="tgl"
+                  ><span
+                    ><span class="sw off" data-tgl="amoled" role="switch"></span
+                    >AMOLED</span
+                  ><span
+                    ><span class="sw off" data-tgl="glass" role="switch"></span
+                    >Glass</span
+                  ></span
+                >
+              </div>
+              <div class="glasscard">
+                <span class="gc-blob"></span>
+                <div class="gc-txt">
+                  <small>TOTAL ASSETS</small><b>₹40,740.00</b>
+                </div>
+              </div>
+            </div>
+
+            <div class="tile reveal">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5.5 9.5a6.5 6.5 0 0 1 12.5 0" />
+                  <path d="M8 12.5a4 4 0 0 1 8 0c0 2.5-.5 5-.5 7" />
+                  <path d="M12 12.5c0 4-1 6.5-2 9" />
+                  <path d="M15 16c.4 2 .5 4 .5 5.5" />
+                  <path d="M4 15c.3 1.5.5 3 .5 4.5" />
+                </svg>
+              </div>
+              <h3>Biometric lock</h3>
+              <p>
+                Fingerprint / face gate over the whole app. Re-engages
+                off-foreground; refuses to enable without a device credential.
+              </p>
+              <div class="lockvis">
+                <div class="ring">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5.5 9.5a6.5 6.5 0 0 1 12.5 0" />
+                    <path d="M8 12.5a4 4 0 0 1 8 0c0 2.5-.5 5-.5 7" />
+                    <path d="M12 12.5c0 4-1 6.5-2 9" />
+                    <path d="M15 16c.4 2 .5 4 .5 5.5" />
+                  </svg>
+                </div>
+                <small>Re-locks every time<br />you leave the app</small>
+              </div>
+            </div>
+
+            <div class="tile reveal" data-d="1">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="m17 2.5 4 4-4 4" />
+                  <path d="M3 11.5v-1a4 4 0 0 1 4-4h14" />
+                  <path d="m7 21.5-4-4 4-4" />
+                  <path d="M21 12.5v1a4 4 0 0 1-4 4H3" />
+                </svg>
+              </div>
+              <h3>Recurring, month-end safe</h3>
+              <p>
+                Daily to yearly. Jan 31 monthly lands on Feb 28 — never Mar 3.
+                Posts silently even if the app was closed, catching up missed
+                periods.
+              </p>
+            </div>
+
+            <div class="tile span2 reveal" data-d="2">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 3v11" />
+                  <path d="m7 10 5 5 5-5" />
+                  <path d="M4 20h16" />
+                </svg>
+              </div>
+              <h3>Backups & statements</h3>
+              <p>
+                Export everything to CSV or a real hand-rolled .xlsx and restore
+                on any device. Or generate a polished shareable PDF statement —
+                opening/closing balance, summary, full paginated table — via
+                Android's own PdfDocument.
+              </p>
+              <div class="tagchips">
+                <span class="hot">backup.xlsx</span
+                ><span class="hot">statement_ICICI_Jul.pdf</span
+                ><span>restore · matched by name</span>
+              </div>
+            </div>
+
+            <div class="tile span2 reveal">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                >
+                  <circle cx="12" cy="12" r="8.5" />
+                  <circle cx="12" cy="12" r="5" />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="1.6"
+                    fill="currentColor"
+                    stroke="none"
+                  />
+                </svg>
+              </div>
+              <h3>Goals that celebrate</h3>
+              <p>
+                A target for an account to reach; progress is its live balance.
+                A one-time celebratory notification the first time you hit it.
+              </p>
+              <div class="budgetbar">
+                <div class="top">
+                  <span>Emergency fund</span><span>72%</span>
+                </div>
+                <div class="track"><div class="fill" data-fill="72"></div></div>
+              </div>
+            </div>
+
+            <div class="tile span2 reveal" data-d="1">
+              <div class="ic">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.9"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 6h18" />
+                  <path
+                    d="M8 6V4.5A1.5 1.5 0 0 1 9.5 3h5A1.5 1.5 0 0 1 16 4.5V6"
+                  />
+                  <path d="M6 6l1 14a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-14" />
+                  <path d="M10 11v6M14 11v6" />
+                </svg>
+              </div>
+              <h3>Trash, not gone</h3>
+              <p>
+                Soft-delete with restore and delete-forever; auto-purge after 7
+                days. Receipt photos cleaned up automatically too.
+              </p>
+              <div class="tagchips">
+                <span class="hot">restore</span><span>delete forever</span
+                ><span>7-day auto-purge</span><span>receipts cleaned</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIVACY -->
+      <section id="privacy" class="privacy">
+        <div class="wrap">
+          <div class="reveal">
+            <span class="eyebrow" style="justify-content: center"
+              >The promise</span
+            >
+            <p class="big" style="margin-top: 18px">
+              No account. No login.<br /><span class="x">No network.</span>
+              <span class="ok">Ever.</span>
+            </p>
+            <p>
+              Every rupee lives on the device in Room + DataStore. There is no
+              server to leak, no analytics to opt out of, no email to remember.
+              WalletFlow works in a tunnel, on a flight, in a basement — and the
+              balance is still exact, because money is stored as integer paise,
+              never floats.
+            </p>
+          </div>
+          <div class="privacy-grid">
+            <div class="pcard reveal">
+              <div class="ic">📴</div>
+              <h3>Offline-first</h3>
+              <p>
+                The database is the source of truth — not a sync queue. Fully
+                local, fully yours, on Android 9.0+ (SDK 28 → 37).
+              </p>
+            </div>
+            <div class="pcard reveal" data-d="1">
+              <div class="ic">🧮</div>
+              <h3>Exact by design</h3>
+              <p>
+                Integer minor-unit math end to end. ₹20,000 minus three expenses
+                is exactly ₹19,151.00 — the test suite says so.
+              </p>
+            </div>
+            <div class="pcard reveal" data-d="2">
+              <div class="ic">🔏</div>
+              <h3>Yours to take</h3>
+              <p>
+                CSV or .xlsx export any time, restore on a new device. No
+                lock-in, no subscription wall, no dark patterns.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SHOWCASE -->
+      <section id="screens" class="showcase">
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">Straight from the build</span>
+            <h2>The real screens. <em>Ledger ink & gold.</em></h2>
+          </div>
+          <div class="scr-tabs reveal" id="scrTabs"></div>
+        </div>
+        <div class="wrap">
+          <div class="rail reveal" id="rail"></div>
+        </div>
+      </section>
+
+      <!-- STATS -->
+      <section class="stats" style="padding: clamp(48px, 6vw, 80px) 0">
+        <div class="wrap">
+          <div class="grid">
+            <div class="stat reveal">
+              <div class="n" data-count="190" data-suffix="+">0</div>
+              <div class="l">preset subcategories</div>
+            </div>
+            <div class="stat reveal" data-d="1">
+              <div class="n" data-count="30" data-suffix="+">0</div>
+              <div class="l">category groups</div>
+            </div>
+            <div class="stat reveal" data-d="2">
+              <div class="n" data-count="5" data-suffix="">0</div>
+              <div class="l">widget layouts</div>
+            </div>
+            <div class="stat reveal" data-d="3">
+              <div class="n" data-count="0" data-fixed="0">0</div>
+              <div class="l">servers contacted</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq">
+        <div class="wrap faq-grid">
+          <div class="reveal">
+            <span class="eyebrow">Questions</span>
+            <h2 style="margin-top: 16px; font-size: clamp(28px, 3.6vw, 46px)">
+              Good to know
+              <em style="color: var(--gold); font-style: italic">before</em> you
+              install.
+            </h2>
+            <p class="lead" style="margin-top: 14px">
+              The whole architecture is documented in the project README —
+              Kotlin, Compose, Room, Glance, androidx.biometric. No black boxes.
+            </p>
+          </div>
+          <div class="faq-list reveal" data-d="1" id="faqList"></div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="cta" id="get">
+        <div class="wrap">
+          <div class="cta-panel reveal">
+            <div class="logo">
+              <img src="./src/assets/logo.png" alt="WalletFlow icon" />
+            </div>
+            <h2>Stop guessing your balance.<br /><em>Start knowing it.</em></h2>
+            <p>
+              Install WalletFlow, add your accounts, and watch every transaction
+              land exactly where the money went. Free, offline, and entirely
+              yours.
+            </p>
+            <div class="cta-actions">
+              <a
+                class="play-badge"
+                href="https://play.google.com/apps/test/com.walletflow.in/"
+                data-play-badge
+                aria-label="Get it on Google Play"
+              ></a>
+              <a class="btn-ghost" href="#screens">Browse the screens</a>
+            </div>
+            <div class="cta-reassure">
+              <span><span class="d"></span> No account</span>
+              <span><span class="d"></span> No tracking</span>
+              <span><span class="d"></span> Android 9.0+</span>
+              <span><span class="d"></span> 8-slide guided tour</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="foot-grid">
+          <div class="foot-brand">
+            <a class="brand" href="#top">Wallet<b>Flow</b></a>
+            <p>
+              An offline-first personal finance manager for Android. Every rupee
+              lives on the device; every balance is exact.
+            </p>
+          </div>
+          <div class="foot-col">
+            <h4>Product</h4>
+            <a href="#features">Features</a>
+            <a href="#screens">Screens</a>
+            <a href="#how">Balance engine</a>
+            <a href="#get">Get the app</a>
+          </div>
+          <div class="foot-col">
+            <h4>Trust</h4>
+            <a href="#privacy">Privacy & offline</a>
+            <a href="#faq">FAQ</a>
+            <a href="#features">Import / Export</a>
+            <a href="#features">Biometric lock</a>
+          </div>
+          <div class="foot-col">
+            <h4>Connect</h4>
+            <a href="#"
+              ><svg class="ic-sm"><use href="/icons.svg#github-icon"></use></svg
+              >Source & README</a
+            >
+            <a href="#"
+              ><svg class="ic-sm"><use href="/icons.svg#notes-icon"></use></svg
+              >Release notes</a
+            >
+            <a href="#"
+              ><svg class="ic-sm"><use href="/icons.svg#issue-icon"></use></svg
+              >Report an issue</a
+            >
+            <a href="#"
+              ><svg class="ic-sm"><use href="/icons.svg#press-icon"></use></svg
+              >Press kit</a
+            >
+          </div>
+        </div>
+        <div class="foot-bottom">
+          <span
+            >© 2026 WalletFlow · Built offline-first with Kotlin, Compose &
+            Room.</span
+          >
+          <span
+            >WalletFlow is a personal ledger, not financial advice. Made in
+            India 🇮🇳</span
+          >
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

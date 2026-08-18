@@ -873,4 +873,141 @@ import googlePlay from "../assets/google-play.png";
       ans.style.maxHeight = open ? ans.scrollHeight + "px" : "0";
     });
   });
+
+  /* ---------- modal ---------- */
+  var modalOverlay = document.getElementById("modalOverlay");
+  var modalTitle = document.getElementById("modalTitle");
+  var modalBody = document.getElementById("modalBody");
+  var modalClose = document.getElementById("modalClose");
+
+  var modalContent = {
+    readme: {
+      title: "Source & README",
+      summary:
+        "<h4>Summary</h4>" +
+        "<p><strong>WalletFlow</strong> is an offline-first personal finance manager for Android. No account, no login, no network required — every rupee lives on the device, and every transaction belongs to a real account so balances are always exact.</p>" +
+        "<p>Built with Kotlin, Jetpack Compose, Material 3, Room, Navigation Compose, DataStore, Glance (widget), and androidx.biometric (app lock).</p>" +
+        "<ul>" +
+        "<li>Every transaction belongs to an account — expense reduces, income increases, transfer moves between accounts.</li>" +
+        "<li>Money stored as integer minor units (paise) — no floating-point drift.</li>" +
+        "<li>Full architecture documented: ui/, domain/, data/, util/, notification/, widget/ layers.</li>" +
+        "<li>Pure-domain logic passes a test suite covering the headline balance-engine scenario.</li>" +
+        "</ul>",
+      body:
+        "<h2>WalletFlow</h2>" +
+        "<p>An offline-first personal finance manager for Android. No account, no login, no network required — every rupee lives on the device, and every transaction belongs to a real account so your balances are always exact.</p>" +
+        "<p>Built with <strong>Kotlin</strong>, <strong>Jetpack Compose</strong>, <strong>Material 3</strong>, <strong>Room</strong>, <strong>Navigation Compose</strong>, <strong>DataStore</strong>, <strong>Glance</strong> (for the home-screen widget), and <strong>androidx.biometric</strong> (for the app lock).</p>" +
+        "<hr>" +
+        "<h3>The core idea</h3>" +
+        "<p>The flaw WalletFlow fixes: most simple expense trackers record what you spent but never subtract it from where the money actually came from, so they can't tell you how much you really have left.</p>" +
+        "<p>In WalletFlow:</p>" +
+        "<ul>" +
+        "<li>Every transaction <strong>belongs to an account</strong>.</li>" +
+        "<li>An <strong>expense</strong> reduces its account; <strong>income</strong> increases it.</li>" +
+        "<li>A <strong>transfer</strong> moves money between two accounts and never counts as income or expense.</li>" +
+        "<li>Balances are always <strong>derived from transactions</strong> — never edited by hand.</li>" +
+        "</ul>" +
+        "<p>Money is stored as integer <strong>minor units</strong> (paise/cents), so balances never drift from floating-point rounding.</p>" +
+        "<hr>" +
+        "<h3>Running it</h3>" +
+        "<p>This project is a standard Gradle Android app. You need <strong>Android Studio</strong> (Koala / 2024.1+) or the Android command-line tools with an SDK for API 34.</p>" +
+        "<pre><code>gradle wrapper --gradle-version 8.9\n./gradlew assembleDebug</code></pre>" +
+        "<p>Or simply open the folder in Android Studio and let it sync — it will create the wrapper and download dependencies automatically. Then Run.</p>" +
+        "<ul>" +
+        "<li>Min SDK: 28 (Android 9.0)</li>" +
+        "<li>Target/Compile SDK: 37</li>" +
+        "<li>JDK: 17</li>" +
+        "</ul>" +
+        "<hr>" +
+        "<h3>Architecture</h3>" +
+        "<p>A small, explicit layering — no DI framework, since the app is light enough that manual wiring (<code>AppContainer</code>) is clearer and starts faster.</p>" +
+        '<pre><code>ui/            Compose screens + WalletViewModel (StateFlow-driven)\n  dashboard/   Total-assets hero, account carousel, recent activity, budget\n  transactions/ Grouped history, search, add/edit form, trash\n  accounts/    Account list, detail, add/edit, archived accounts\n  reports/     Period presets, custom range, trend charts, category breakdown\n  settings/    Budgets, goals, categories, reminders, import/export, PDF\n  onboarding/  First-launch carousel + per-screen spotlight\n  navigation/  NavHost with slide/fade transitions, context-aware FAB\n  components/  Reusable cards, chips, charts, badges\n  theme/       "Ledger ink and gold" Material 3 theme + selectable accents\ndomain/\n  model/       Money (minor-unit math), enums, UI models\n  engine/      BalanceEngine, RecurrenceEngine, SmsTransactionParser\ndata/\n  entity/      Room tables: Account, Transaction, Category, Budget, Goal\n  dao/         Queries incl. live per-account balance aggregation\n  db/          Room database + first-run seeding + reconciliation\n  repository/  FinanceRepository, SettingsStore\n  backup/      CSV + .xlsx reader/writer\n  export/      StatementPdfWriter (Android\'s PdfDocument, no library)\nutil/          Date range helpers, AppHaptics, TagUtils, ReceiptStore\nnotification/  Daily reminder, recurring check, goal celebration\nwidget/        Glance home-screen widget — 5 size-aware layouts</code></pre>' +
+        "<h3>Why the balance is always right</h3>" +
+        "<p><code>TransactionDao.observeAccountDelta</code> sums every transaction's signed effect on an account directly in SQL — income and transfers-in add, expenses and transfers-out subtract. The repository adds that delta to the account's opening balance and exposes it as a <code>Flow</code>, so any change anywhere updates every balance reactively.</p>" +
+        "<p><code>BalanceEngine</code> holds the same rules in pure Kotlin (no Android), validating transactions before they're saved and computing running balances for the history view.</p>" +
+        "<hr>" +
+        "<h3>What's implemented</h3>" +
+        "<ul>" +
+        "<li>Dashboard with total assets, monthly income/expense, budget, and a quick-stats tile</li>" +
+        "<li>Accounts: create / edit / archive / delete, realistic card art, multi-currency</li>" +
+        "<li>Transactions: expense / income / transfer, account-linked, categories, notes, search, grouped history, trash</li>" +
+        "<li>Add from a shared message: long-press a bank/UPI SMS, share to WalletFlow — prefills amount, direction, payee, date</li>" +
+        "<li>Recurring transactions: daily/weekly/monthly/yearly, month-end-safe date math, silent background posting</li>" +
+        "<li>Tags: chip-based entry with autocomplete, filter Transactions and Reports</li>" +
+        "<li>Receipt photos: attach via camera or gallery, thumbnail in transaction row, full-screen preview</li>" +
+        "<li>Savings goals: target amount for an account, progress is live balance, celebratory notification</li>" +
+        "<li>Trash: soft-delete with restore and delete-forever; auto-purge after 7 days</li>" +
+        "<li>Budgets: overall monthly + per-category, group budgets roll up, 80/90/100% color alerts</li>" +
+        "<li>Reports: period presets, custom range, trend charts (line/bar/heatmap), category breakdown, activity streak heatmap</li>" +
+        "<li>Categories: two-level hierarchy, 30+ groups, ~190 presets, fully editable and deletable</li>" +
+        "<li>Daily reminder: pick a time, notification deep-links to Add Transaction, survives reboots</li>" +
+        "<li>Import & Export: CSV or .xlsx backup/restore, matched by name</li>" +
+        "<li>Statement (PDF): polished, shareable PDF for account or category over any period</li>" +
+        "<li>Home-screen widget (Glance): resizable, 5 layouts, refresh + quick-add</li>" +
+        "<li>Biometric lock: fingerprint / face / screen-lock gate, re-engages off-foreground</li>" +
+        "<li>Haptic feedback: optional tick on toggles, double pulse on saves</li>" +
+        "<li>Personalization: light/dark/system, 6 accents, AMOLED, glassmorphism, currency picker</li>" +
+        "<li>App-wide polish: two-stage splash, slide/fade transitions, list animations, context-aware FAB</li>" +
+        "<li>First-launch tour: onboarding carousel + contextual spotlight + per-screen first-visit highlights</li>" +
+        "<li>All persisted locally with Room + DataStore; fully offline</li>" +
+        "</ul>" +
+        "<hr>" +
+        "<h3>Verified</h3>" +
+        "<p>The pure-domain logic (money math, the balance engine, validation rules) compiles and <strong>passes a test suite</strong> covering the headline scenario — Bank ₹20,000 dropping to ₹19,151 after three expenses, transfers moving money without affecting income/expense totals, and validation rejecting bad input.</p>" +
+        "<hr>" +
+        "<h3>Roadmap</h3>" +
+        "<p>Carry-forward month rollover, cloud sync, OCR receipt scanning, and a net-worth dashboard remain on the roadmap.</p>",
+    },
+    release: {
+      title: "Release Notes",
+      summary:
+        "<h4>Summary</h4>" +
+        "<p><strong>WalletFlow v1.0</strong> — the initial public release. A fully offline-first personal finance manager for Android with account-linked transactions, realistic card art, balance derivation, and zero network dependency.</p>" +
+        "<ul>" +
+        "<li>Core ledger: expense / income / transfer with account-linked balance derivation.</li>" +
+        "<li>Accounts: realistic bank/wallet card UI, multi-currency, archive support.</li>" +
+        "<li>Reports: line, bar, and heatmap trend charts; category breakdown; streak heatmap.</li>" +
+        "<li>Widget: 5-size Glance widget with quick-add and refresh.</li>" +
+        "<li>Security: optional biometric lock with auto-re-engagement.</li>" +
+        "<li>Backup: CSV and .xlsx export/import; PDF statement generation.</li>" +
+        "</ul>",
+      body: "",
+    },
+  };
+
+  function openModal(key) {
+    var data = modalContent[key];
+    if (!data) return;
+    modalTitle.textContent = data.title;
+    modalBody.innerHTML =
+      '<div class="modal-summary">' +
+      data.summary +
+      "</div>" +
+      (data.body ? '<hr class="modal-divider">' + data.body : "");
+    modalOverlay.classList.add("open");
+    modalOverlay.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modalOverlay.classList.remove("open");
+    modalOverlay.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  modalClose.addEventListener("click", closeModal);
+  modalOverlay.addEventListener("click", function (e) {
+    if (e.target === modalOverlay) closeModal();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && modalOverlay.classList.contains("open"))
+      closeModal();
+  });
+
+  document.querySelectorAll("[data-modal]").forEach(function (el) {
+    el.addEventListener("click", function (e) {
+      e.preventDefault();
+      openModal(el.getAttribute("data-modal"));
+    });
+  });
 })();
